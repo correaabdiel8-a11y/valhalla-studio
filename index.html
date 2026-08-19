@@ -351,6 +351,7 @@
     background:var(--border); border:1px solid var(--border);
   }
   @media (max-width:900px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:901px){ .services-grid .service-card:nth-child(7){ grid-column:2; } }
   @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
 
   .service-card{
@@ -587,6 +588,7 @@
     <div class="nav-links">
       <a href="#servicios">Servicios</a>
       <a href="#menus">Menús Digitales</a>
+      <a href="#paginas-web">Páginas Web</a>
       <a href="#paquetes">Paquetes</a>
       <a href="#trabajos">Trabajos</a>
       <a href="#contacto">Contacto</a>
@@ -605,6 +607,7 @@
     <ul>
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#menus">Menús Digitales</a></li>
+      <li><a href="#paginas-web">Páginas Web</a></li>
       <li><a href="#paquetes">Paquetes</a></li>
       <li><a href="#trabajos">Trabajos</a></li>
       <li><a href="#contacto">Contacto</a></li>
@@ -709,6 +712,13 @@
         <p>Retoque y optimización de fotos de producto, platillos y catálogos.</p>
         <div class="service-meta"><span class="label">Por foto</span><span class="price">$70 MXN</span></div>
       </div>
+      <!-- Paginas Web -->
+      <div class="service-card tilt">
+        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="8" width="30" height="24" rx="1"/><path d="M5 14H35"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="11" r="1" fill="currentColor" stroke="none"/></svg>
+        <h3>Diseño de Páginas Web</h3>
+        <p>Landing pages y sitios completos, diseñados desde cero para representar tu marca y convertir visitantes en clientes.</p>
+        <div class="service-meta"><span class="label">Desde</span><span class="price">$5,000 MXN</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -743,6 +753,42 @@
         </div>
         <div class="stand"></div>
         <div class="base"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGINAS WEB ============ -->
+<section class="menus" id="paginas-web">
+  <svg class="fjord-divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" style="position:absolute; top:0; left:0; transform:translateY(-50%);">
+    <path d="M0,28 C160,54 320,4 480,30 S780,56 960,26 S1120,2 1200,28"/>
+  </svg>
+  <div class="container">
+    <div class="menus-grid">
+      <div class="screen-frame reveal">
+        <div class="bezel corners">
+          <!-- REEMPLAZAR: captura de un sitio web que hayas hecho, 800x500px recomendado -->
+          <img src="Imagenes/web.png" loading="lazy">
+        </div>
+        <div class="stand"></div>
+        <div class="base"></div>
+      </div>
+
+      <div class="menus-copy reveal">
+        <div class="eyebrow">Presencia Digital</div>
+        <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem); font-weight:700; margin-top:14px; line-height:1.15;">Tu negocio, con una página que sí vende.</h2>
+        <p>Landing pages y sitios completos, diseñados desde cero — sin plantillas genéricas — para que tu negocio se vea tan profesional en línea como en persona.</p>
+        <ul class="menus-list">
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10L8 14L16 6"/></svg>Diseño 100% personalizado, sin plantillas genéricas</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10L8 14L16 6"/></svg>Totalmente responsive: celular, tablet y escritorio</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10L8 14L16 6"/></svg>Optimizado para carga rápida</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10L8 14L16 6"/></svg>Integración directa con WhatsApp y redes sociales</li>
+        </ul>
+        <div class="menus-price">
+          <span class="from">Desde</span>
+          <span class="amount">$5,000 MXN</span>
+          <span class="from">según el alcance del proyecto</span>
+        </div>
       </div>
     </div>
   </div>

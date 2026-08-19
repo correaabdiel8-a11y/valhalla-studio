@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valhalla Studio — Diseño Gráfico y Contenido Digital</title>
-<meta name="description" content="Valhalla Studio. Diseño de marca, redes sociales, video, menús digitales y diseño publicitario para negocios en CDMX.">
+<title>Valhalla Studio | Diseño Gráfico y Diseño Digital en CDMX</title>
+<meta name="description" content="Branding, redes sociales, páginas web, menús digitales y contenido visual para negocios en CDMX y México.">
 <link rel="icon" type="image/jpeg" href="Imagenes/Isologo.jpeg">
 
 <!--
@@ -32,534 +32,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<style>
-  :root{
-    --bg: #07090E;
-    --bg-2: #0B0E15;
-    --surface: #131822;
-    --surface-soft: #171D29;
-    --border: #212938;
-    --accent: #38BDF8;
-    --accent-dim: rgba(56,189,248,0.14);
-    --accent-dimmer: rgba(56,189,248,0.06);
-    --text: #F8FAFC;
-    --text-muted: #8B96A8;
-    --text-faint: #5B6579;
-    --radius: 2px;
-    --container: 1180px;
-    --ease: cubic-bezier(.16,.8,.24,1);
-  }
-
-  *,*::before,*::after{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    *,*::before,*::after{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
-  }
-
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Outfit', sans-serif;
-    font-weight:400;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; text-decoration:none; }
-  ul{ margin:0; padding:0; list-style:none; }
-  section{ position:relative; }
-
-  .container{
-    max-width:var(--container);
-    margin:0 auto;
-    padding:0 clamp(20px,5vw,48px);
-  }
-
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.72rem;
-    letter-spacing:0.28em;
-    text-transform:uppercase;
-    color:var(--accent);
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px;
-    height:1px;
-    background:var(--accent);
-    display:inline-block;
-  }
-
-  h1,h2,h3{ margin:0; font-family:'Outfit', sans-serif; }
-
-  .section-head{
-    max-width:640px;
-    margin-bottom:56px;
-  }
-  .section-head h2{
-    font-size:clamp(1.9rem, 3.4vw, 2.7rem);
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin-top:14px;
-    line-height:1.15;
-  }
-  .section-head p{
-    color:var(--text-muted);
-    font-size:1rem;
-    line-height:1.7;
-    margin-top:16px;
-    max-width:56ch;
-  }
-
-  /* ---------- reveal on scroll ---------- */
-  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-  .reveal.is-visible{ opacity:1; transform:translateY(0); }
-
-  /* ---------- staggered children (grids) ---------- */
-  .stagger > *{
-    opacity:0; transform:translateY(26px);
-    transition:opacity .7s var(--ease), transform .7s var(--ease);
-    transition-delay:calc(var(--i, 0) * 70ms);
-  }
-  .stagger.is-visible > *{ opacity:1; transform:translateY(0); }
-
-  /* ---------- scroll progress bar ---------- */
-  .progress-bar{
-    position:fixed; top:0; left:0; height:2px; width:0%;
-    background:var(--accent); z-index:200;
-    box-shadow:0 0 12px 0 var(--accent);
-    transition:width .1s linear;
-  }
-
-  /* ---------- cursor glow (hero) ---------- */
-  .cursor-glow{
-    position:absolute; width:520px; height:520px; border-radius:50%;
-    background:radial-gradient(circle, rgba(56,189,248,0.16), transparent 70%);
-    pointer-events:none; z-index:1; mix-blend-mode:screen;
-    transform:translate(-50%,-50%); opacity:0;
-    transition:opacity .5s var(--ease);
-    will-change:transform;
-  }
-  .hero:hover .cursor-glow{ opacity:1; }
-
-  /* ---------- tilt cards ---------- */
-  .tilt{
-    transform:perspective(900px) rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)) translateZ(0);
-    transition:transform .5s var(--ease), background .3s var(--ease);
-    will-change:transform;
-  }
-  .tilt:hover{ transition:transform .1s linear, background .3s var(--ease); }
-
-  /* ---------- hero entrance sequence ---------- */
-  @keyframes riseIn{
-    from{ opacity:0; transform:translateY(26px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-  .hero-inner > *{ opacity:0; animation:riseIn .9s var(--ease) forwards; }
-  .logo-slot{ animation-delay:.1s !important; }
-  .wordmark{ animation-delay:.25s !important; }
-  .rule-coords{ animation-delay:.5s !important; }
-  .lema{ animation-delay:.62s !important; }
-  .hero-sub{ animation-delay:.74s !important; }
-  .hero-cta{ animation-delay:.86s !important; }
-
-  @media (prefers-reduced-motion: reduce){
-    .hero-inner > *{ animation:none !important; opacity:1 !important; transform:none !important; }
-    .cursor-glow{ display:none; }
-    .tilt{ transform:none !important; }
-  }
-
-  /* ---------- topographic background ---------- */
-  .contour-bg{
-    position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;
-  }
-  .contour-bg svg{ position:absolute; width:140%; left:-20%; opacity:0.55; }
-  .contour-bg .c1{ top:-8%; animation: driftA 50s linear infinite alternate; }
-  .contour-bg .c2{ bottom:-14%; animation: driftB 60s linear infinite alternate; opacity:0.35; }
-  @keyframes driftA{ from{ transform:translateY(0) translateX(0);} to{ transform:translateY(18px) translateX(-14px);} }
-  @keyframes driftB{ from{ transform:translateY(0) translateX(0);} to{ transform:translateY(-14px) translateX(12px);} }
-
-  /* ============ NAV ============ */
-  .nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    padding:18px 0;
-    transition:background .4s var(--ease), border-color .4s var(--ease), padding .4s var(--ease);
-    border-bottom:1px solid transparent;
-  }
-  .nav.scrolled{
-    background:rgba(7,9,14,0.82);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border-bottom-color:var(--border);
-    padding:12px 0;
-  }
-  .nav .container{ display:flex; align-items:center; justify-content:space-between; }
-  .nav-brand{ display:flex; align-items:center; gap:12px; }
-  .nav-brand img{
-    width:36px; height:36px; border-radius:50%;
-    border:1px solid var(--border); object-fit:cover;
-  }
-  .nav-brand span{
-    font-weight:700; letter-spacing:0.16em; font-size:0.82rem;
-  }
-  .nav-links{ display:flex; align-items:center; gap:38px; }
-  .nav-links a{
-    font-size:0.86rem; color:var(--text-muted); letter-spacing:0.02em;
-    position:relative; padding:4px 0; transition:color .25s var(--ease);
-  }
-  .nav-links a:hover{ color:var(--text); }
-  .nav-links a::after{
-    content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
-    background:var(--accent); transition:right .3s var(--ease);
-  }
-  .nav-links a:hover::after{ right:0; }
-
-  .btn{
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.78rem;
-    letter-spacing:0.06em;
-    padding:12px 22px;
-    border-radius:var(--radius);
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    cursor:pointer;
-    transition:transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
-    white-space:nowrap;
-  }
-  .btn-solid{
-    background:var(--accent); color:#04121C; border:1px solid var(--accent); font-weight:600;
-  }
-  .btn-solid:hover{ transform:translateY(-2px); box-shadow:0 10px 30px -8px var(--accent-dim); }
-  .btn-outline{
-    background:transparent; color:var(--text); border:1px solid var(--border);
-  }
-  .btn-outline:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
-
-  .nav-cta{ display:flex; align-items:center; gap:18px; }
-  .nav-toggle{ display:none; background:none; border:1px solid var(--border); width:40px; height:40px; border-radius:var(--radius); color:var(--text); cursor:pointer; }
-  .nav-toggle span{ display:block; width:16px; height:1px; background:var(--text); margin:4px auto; transition:.3s; }
-
-  .mobile-panel{
-    display:none;
-    position:fixed; inset:0 0 auto 0; top:64px; z-index:99;
-    background:rgba(7,9,14,0.98); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-    padding:24px 0 32px;
-    transform:translateY(-12px); opacity:0; pointer-events:none;
-    transition:transform .3s var(--ease), opacity .3s var(--ease);
-  }
-  .mobile-panel.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
-  .mobile-panel ul{ display:flex; flex-direction:column; gap:4px; }
-  .mobile-panel a{ display:block; padding:14px 0; border-bottom:1px solid var(--border); color:var(--text-muted); font-size:0.95rem; }
-
-  @media (max-width:860px){
-    .nav-links{ display:none; }
-    .nav-toggle{ display:block; }
-    .mobile-panel{ display:block; }
-    .btn-outline.nav-only{ display:none; }
-  }
-
-  /* ============ HERO ============ */
-  .hero{
-    min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center;
-    padding:140px 20px 100px;
-    background:
-      radial-gradient(ellipse 60% 50% at 50% 18%, var(--accent-dimmer), transparent 60%),
-      var(--bg);
-  }
-  .hero-inner{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
-
-  .logo-slot{
-    width:92px; height:92px; border-radius:50%;
-    border:1px solid var(--border);
-    overflow:hidden;
-    margin-bottom:34px;
-    box-shadow:0 0 0 1px var(--bg), 0 0 40px -6px var(--accent-dim);
-  }
-  .logo-slot img{ width:100%; height:100%; object-fit:cover; }
-
-  .wordmark{ display:flex; flex-direction:column; align-items:center; }
-  .wordmark .line-main{
-    font-weight:800;
-    font-size:clamp(2.6rem, 9.5vw, 6.6rem);
-    letter-spacing:0.15em;
-    line-height:0.86;
-    margin-right:-0.15em; /* cancela el espacio que letter-spacing deja tras la última letra, para centrar el texto visible y no la caja */
-  }
-  .wordmark .line-sub{
-    font-weight:300;
-    font-size:clamp(1rem, 3vw, 1.9rem);
-    line-height:1;
-    margin-top:10px;
-    color:var(--text-muted);
-  }
-
-  .rule-coords{
-    display:flex; align-items:center; gap:16px;
-    margin-top:38px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:0.72rem;
-    letter-spacing:0.14em;
-    color:var(--text-faint);
-  }
-  .rule-coords .tick{ width:34px; height:1px; background:var(--border); position:relative; }
-  .rule-coords .tick::before{ content:""; position:absolute; left:0; top:-3px; width:1px; height:7px; background:var(--text-faint); }
-  .rule-coords .tick::after{ content:""; position:absolute; right:0; top:-3px; width:1px; height:7px; background:var(--text-faint); }
-
-  .lema{
-    margin-top:30px;
-    font-size:clamp(1.05rem, 2vw, 1.3rem);
-    color:var(--text);
-    font-weight:400;
-    max-width:34ch;
-  }
-  .lema em{ color:var(--accent); font-style:normal; }
-
-  .hero-sub{
-    margin-top:18px; color:var(--text-muted); max-width:46ch; line-height:1.7; font-size:0.98rem;
-  }
-
-  .hero-cta{ margin-top:44px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
-  @media (max-width:400px){
-    .hero-cta{ flex-direction:column; width:100%; }
-    .hero-cta .btn{ width:100%; justify-content:center; }
-  }
-
-  .scroll-hint{
-    margin-top:60px;
-    font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.2em; color:var(--text-faint);
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    pointer-events:none;
-  }
-  @media (max-height:680px){ .scroll-hint{ display:none; } }
-  .scroll-hint .line{ width:1px; height:30px; background:linear-gradient(var(--text-faint), transparent); animation:scrollLine 2.2s ease-in-out infinite; }
-  @keyframes scrollLine{ 0%{ transform:scaleY(0); transform-origin:top;} 50%{ transform:scaleY(1); transform-origin:top;} 51%{ transform-origin:bottom;} 100%{ transform:scaleY(0); transform-origin:bottom;} }
-
-  /* ============ SERVICIOS ============ */
-  .services{ padding:130px 0 100px; background:var(--bg-2); }
-  .services-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
-    background:var(--border); border:1px solid var(--border);
-  }
-  @media (max-width:900px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (min-width:901px){ .services-grid .service-card:nth-child(7){ grid-column:2; } }
-  @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
-
-  .service-card{
-    background:var(--surface);
-    padding:38px 30px;
-    display:flex; flex-direction:column; gap:18px;
-    transition:background .3s var(--ease);
-  }
-  .service-card:hover{ background:var(--surface-soft); }
-  .service-card.tilt{ transition:transform .5s var(--ease), background .3s var(--ease); }
-  .service-card.tilt:hover{ transition:transform .1s linear, background .3s var(--ease); }
-  .service-icon{ width:38px; height:38px; color:var(--accent); }
-  .service-card h3{ font-size:1.12rem; font-weight:600; }
-  .service-card p{ color:var(--text-muted); font-size:0.9rem; line-height:1.65; flex-grow:1; }
-  .service-meta{
-    display:flex; justify-content:space-between; align-items:baseline;
-    border-top:1px solid var(--border); padding-top:16px; margin-top:4px;
-  }
-  .service-meta .label{ font-size:0.72rem; letter-spacing:0.08em; color:var(--text-faint); text-transform:uppercase; }
-  .service-meta .price{ font-family:'JetBrains Mono', monospace; color:var(--accent); font-size:0.95rem; }
-
-  /* ============ MENUS DESTACADO ============ */
-  .menus{ padding:110px 0; background:var(--bg); }
-  .menus-grid{
-    display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;
-  }
-  @media (max-width:900px){ .menus-grid{ grid-template-columns:1fr; gap:48px; } }
-
-  .menus-copy p{ color:var(--text-muted); line-height:1.75; margin-top:18px; max-width:52ch; }
-  .menus-list{ margin-top:30px; display:flex; flex-direction:column; gap:14px; }
-  .menus-list li{
-    display:flex; gap:14px; align-items:flex-start; font-size:0.92rem; color:var(--text);
-  }
-  .menus-list svg{ flex-shrink:0; width:16px; height:16px; margin-top:4px; color:var(--accent); }
-  .menus-price{
-    margin-top:34px; padding-top:24px; border-top:1px solid var(--border);
-    display:flex; align-items:baseline; gap:12px;
-  }
-  .menus-price .from{ font-size:0.72rem; letter-spacing:0.1em; color:var(--text-faint); text-transform:uppercase; }
-  .menus-price .amount{ font-family:'JetBrains Mono', monospace; font-size:1.5rem; color:var(--accent); }
-
-  .screen-frame{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:14px;
-    box-shadow:0 30px 80px -30px rgba(0,0,0,0.6);
-  }
-  .screen-frame .bezel{
-    border-radius:4px; overflow:hidden; position:relative;
-    aspect-ratio:16/10; border:1px solid var(--border);
-  }
-  .screen-frame .bezel img,
-  .screen-frame .bezel video{ width:100%; height:100%; object-fit:cover; }
-  .screen-frame .stand{ width:60px; height:14px; background:var(--surface); margin:10px auto 0; border-radius:0 0 4px 4px; }
-  .screen-frame .base{ width:130px; height:6px; background:var(--border); margin:0 auto; border-radius:4px; }
-
-  /* ============ PAQUETES ============ */
-  .packages{ padding:130px 0 100px; background:var(--bg-2); }
-  .packages-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  @media (max-width:900px){ .packages-grid{ grid-template-columns:1fr; max-width:440px; margin:0 auto; } }
-
-  .package-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    padding:36px 30px;
-    display:flex; flex-direction:column;
-    position:relative;
-  }
-  .package-card.featured{
-    border-color:var(--accent);
-    box-shadow:0 0 0 1px var(--accent), 0 20px 60px -24px var(--accent-dim);
-  }
-  .badge{
-    position:absolute; top:-13px; left:30px;
-    background:var(--accent); color:#04121C;
-    font-family:'JetBrains Mono', monospace; font-size:0.65rem; letter-spacing:0.08em;
-    padding:5px 10px; border-radius:2px; font-weight:600;
-  }
-  .package-card .tier{ font-size:0.72rem; letter-spacing:0.16em; color:var(--text-faint); text-transform:uppercase; }
-  .package-card h3{ font-size:1.4rem; margin-top:10px; font-weight:700; }
-  .package-card .price-row{ margin-top:18px; display:flex; align-items:baseline; gap:6px; }
-  .package-card .price-row .amount{ font-family:'JetBrains Mono', monospace; font-size:2rem; color:var(--text); }
-  .package-card .price-row .period{ color:var(--text-faint); font-size:0.82rem; }
-  .package-card .desc{ color:var(--text-muted); font-size:0.88rem; margin-top:14px; line-height:1.6; }
-  .package-card ul{ margin-top:26px; display:flex; flex-direction:column; gap:12px; flex-grow:1; }
-  .package-card li{ display:flex; gap:10px; font-size:0.87rem; color:var(--text); align-items:flex-start; }
-  .package-card li svg{ width:14px; height:14px; margin-top:3px; color:var(--accent); flex-shrink:0; }
-  .package-card .btn{ margin-top:30px; justify-content:center; width:100%; }
-
-  /* ============ TABLA A LA MEDIDA ============ */
-  .alacarte{ padding:110px 0; background:var(--bg); }
-  .alacarte-table{ margin-top:10px; border-top:1px solid var(--border); }
-  .alacarte-row{
-    display:flex; justify-content:space-between; align-items:baseline;
-    padding:20px 4px; border-bottom:1px solid var(--border);
-    gap:20px;
-  }
-  .alacarte-row .name{ font-size:0.98rem; }
-  .alacarte-row .cat{ display:block; font-size:0.7rem; letter-spacing:0.1em; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px; }
-  .alacarte-row .price{ font-family:'JetBrains Mono', monospace; color:var(--accent); font-size:0.95rem; white-space:nowrap; }
-
-  /* ============ TRABAJOS / MUESTRA ============ */
-  .gallery{ padding:130px 0 100px; background:var(--bg-2); }
-  .gallery-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-  @media (max-width:900px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .gallery-grid{ grid-template-columns:1fr; } }
-  .gallery-item{ position:relative; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5; }
-  .gallery-item img,
-  .gallery-item video{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
-  .gallery-item:hover img,
-  .gallery-item:hover video{ transform:scale(1.06); }
-  .gallery-item .tag{
-    position:absolute; left:14px; bottom:14px;
-    font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.08em;
-    background:rgba(7,9,14,0.75); backdrop-filter:blur(6px);
-    padding:7px 11px; border:1px solid var(--border); color:var(--text);
-  }
-
-  /* ============ POR QUE ============ */
-  .why{ padding:110px 0; background:var(--bg); }
-  .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:10px; }
-  @media (max-width:900px){ .why-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .why-grid{ grid-template-columns:1fr; } }
-  .why-item{ background:var(--surface); padding:34px 26px; }
-  .why-item svg{ width:26px; height:26px; color:var(--accent); }
-  .why-item p{ margin-top:16px; font-size:0.9rem; color:var(--text-muted); line-height:1.6; }
-
-  /* ============ CONTACTO ============ */
-  .contact{ padding:130px 0 120px; background:var(--bg-2); position:relative; overflow:hidden; }
-  .contact-panel{
-    max-width:760px; margin:0 auto; text-align:center; position:relative; z-index:2;
-  }
-  .contact-panel .eyebrow{ justify-content:center; }
-  .contact-panel .eyebrow::before{ display:none; }
-  .contact-panel h2{ font-size:clamp(2rem,4vw,3.1rem); margin-top:16px; font-weight:700; line-height:1.15; }
-  .contact-panel p{ color:var(--text-muted); margin-top:18px; font-size:1rem; line-height:1.7; }
-  .contact-cta{ margin-top:40px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-  .contact-info{ margin-top:54px; display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
-  .contact-info div{ text-align:left; }
-  .contact-info .label{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.14em; color:var(--text-faint); text-transform:uppercase; }
-  .contact-info .value{ margin-top:8px; font-size:0.98rem; }
-  .contact-info a.value:hover{ color:var(--accent); }
-
-  /* ============ FOOTER ============ */
-  footer{ background:var(--bg); border-top:1px solid var(--border); padding:40px 0; }
-  footer .container{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
-  .foot-brand{ display:flex; align-items:center; gap:12px; }
-  .foot-brand img{ width:28px; height:28px; border-radius:50%; border:1px solid var(--border); object-fit:cover; }
-  .foot-brand span{ font-size:0.72rem; letter-spacing:0.14em; font-weight:600; }
-  footer .meta{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--text-faint); letter-spacing:0.04em; }
-
-  ::selection{ background:var(--accent); color:#04121C; }
-
-  /* ---------- ambient frost particles (vida en toda la pagina) ---------- */
-  .frost-layer{
-    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
-  }
-  .frost-dot{
-    position:absolute; bottom:-6%;
-    width:var(--s,3px); height:var(--s,3px);
-    background:var(--accent); border-radius:50%;
-    opacity:0; filter:blur(0.3px);
-    animation:frostRise var(--dur,22s) linear infinite;
-    animation-delay:var(--delay,0s);
-  }
-  @keyframes frostRise{
-    0%{ transform:translateY(0) translateX(0); opacity:0; }
-    8%{ opacity:var(--op,0.5); }
-    92%{ opacity:var(--op,0.5); }
-    100%{ transform:translateY(-112vh) translateX(var(--drift,30px)); opacity:0; }
-  }
-  @media (prefers-reduced-motion: reduce){ .frost-layer{ display:none; } }
-
-  /* ---------- eyebrow draw-in line ---------- */
-  .eyebrow::before{ width:0; transition:width .9s var(--ease) .15s; }
-  .reveal.is-visible .eyebrow::before,
-  .section-head.is-visible .eyebrow::before{ width:22px; }
-
-  /* ---------- blueprint corner brackets ---------- */
-  .corners{ position:relative; }
-  .corners::before,
-  .corners::after,
-  .corners .corner-tl,
-  .corners .corner-br{ content:""; position:absolute; width:16px; height:16px; opacity:0; transition:opacity .4s var(--ease), transform .4s var(--ease); }
-  .corners::before{ top:8px; left:8px; border-top:1.5px solid var(--accent); border-left:1.5px solid var(--accent); transform:translate(4px,4px); }
-  .corners::after{ bottom:8px; right:8px; border-bottom:1.5px solid var(--accent); border-right:1.5px solid var(--accent); transform:translate(-4px,-4px); }
-  .corners:hover::before,
-  .corners:hover::after{ opacity:1; transform:translate(0,0); }
-
-  /* ---------- fjord section divider ---------- */
-  .fjord-divider{ display:block; width:100%; height:auto; position:relative; z-index:1; }
-  .fjord-divider path{
-    stroke:var(--accent); stroke-width:1; fill:none; opacity:0.3;
-    stroke-dasharray:1400; stroke-dashoffset:1400;
-    transition:stroke-dashoffset 1.8s var(--ease);
-  }
-  .fjord-divider.is-visible path{ stroke-dashoffset:0; }
-
-  /* ---------- compass rose watermark ---------- */
-  .compass-rose{
-    position:absolute; right:-80px; top:50%; transform:translateY(-50%);
-    width:360px; height:360px; opacity:0.07; z-index:0;
-    animation:spinSlow 90s linear infinite;
-  }
-  @media (max-width:900px){ .compass-rose{ display:none; } }
-  @keyframes spinSlow{ from{ transform:translateY(-50%) rotate(0deg); } to{ transform:translateY(-50%) rotate(360deg); } }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -587,14 +60,13 @@
     </a>
     <div class="nav-links">
       <a href="#servicios">Servicios</a>
-      <a href="#menus">Menús Digitales</a>
-      <a href="#paginas-web">Páginas Web</a>
+      <a href="#proyectos">Proyectos</a>
       <a href="#paquetes">Paquetes</a>
-      <a href="#trabajos">Trabajos</a>
+      <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
     </div>
     <div class="nav-cta">
-      <a href="https://wa.me/529621495348" class="btn btn-outline nav-only" target="_blank" rel="noopener">Escríbeme</a>
+      <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20mejorar%20la%20presencia%20digital%20de%20mi%20negocio" class="btn btn-outline nav-only" target="_blank" rel="noopener">Cotizar proyecto</a>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
         <span></span><span></span><span></span>
       </button>
@@ -606,10 +78,9 @@
   <div class="container">
     <ul>
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#menus">Menús Digitales</a></li>
-      <li><a href="#paginas-web">Páginas Web</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#paquetes">Paquetes</a></li>
-      <li><a href="#trabajos">Trabajos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
   </div>
@@ -648,16 +119,20 @@
       <span class="tick"></span>
     </div>
 
-    <p class="lema">Forjamos tu presencia digital con <em>precisión nórdica.</em></p>
-    <p class="hero-sub">Diseño de marca, redes sociales, video y menús digitales para negocios que quieren verse — y venderse — mejor.</p>
+    <p class="nordic-tag">Forjamos tu presencia digital con <em>precisión nórdica.</em></p>
+
+    <h1 class="hero-headline">Diseño digital para negocios que quieren verse profesionales y vender mejor.</h1>
+    <p class="hero-sub">Creamos identidades de marca, contenido para redes, páginas web y experiencias digitales que convierten la presencia de tu negocio en una herramienta comercial.</p>
+
+    <div class="trust-bar">
+      <span>Diseño estratégico</span><span class="dot">·</span><span>Atención personalizada</span><span class="dot">·</span><span>Entregas profesionales</span><span class="dot">·</span><span>CDMX · México</span>
+    </div>
 
     <div class="hero-cta">
-      <a href="#servicios" class="btn btn-solid">Ver servicios</a>
-      <a href="https://wa.me/529621495348" class="btn btn-outline" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20mejorar%20la%20presencia%20digital%20de%20mi%20negocio" class="btn btn-solid" target="_blank" rel="noopener">Quiero mejorar mi negocio</a>
+      <a href="#proyectos" class="btn btn-outline">Ver proyectos</a>
     </div>
   </div>
-
-  <div class="scroll-hint"><span>DESLIZA</span><span class="line"></span></div>
 </header>
 
 <!-- ============ SERVICIOS ============ -->
@@ -665,59 +140,69 @@
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow">Servicios</div>
-      <h2>Cada pieza, forjada con intención.</h2>
-      <p>Seis frentes de trabajo, un mismo estándar: comunicación clara y entregas puntuales.</p>
+      <h2>¿Qué necesita tu negocio?</h2>
+      <p>Cuatro frentes de trabajo, organizados con intención.</p>
     </div>
 
-    <div class="services-grid stagger">
-      <!-- Diseño de Marca -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 5L34 20L20 35L6 20Z"/><path d="M20 12L27 20L20 28L13 20Z"/></svg>
-        <h3>Diseño de Marca</h3>
-        <p>Logotipo profesional o identidad visual completa: paleta, tipografías y manual básico de aplicación.</p>
-        <div class="service-meta"><span class="label">Desde</span><span class="price">$2,800 MXN</span></div>
+    <div class="services-grid category-grid stagger">
+      <!-- Identidad -->
+      <div class="service-card category-card tilt corners">
+        <span class="cat-index">01 — Identidad</span>
+        <h3>Construimos la identidad de tu negocio</h3>
+        <p>Tu marca no es solo un logo: es la forma en que tus clientes te reconocen, te recuerdan y te perciben.</p>
+        <ul class="cat-includes">
+          <li>Logotipo</li><li>Paleta cromática</li><li>Tipografías</li><li>Manual básico</li><li>Aplicaciones de marca</li>
+        </ul>
+        <div class="cat-links"><a href="branding.html">Ver detalles de Diseño de Marca →</a></div>
+        <div class="cat-footer">
+          <div class="price-block"><span class="label">Desde</span><span class="price">$2,800 MXN</span></div>
+          <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20mi%20marca" class="btn btn-outline" target="_blank" rel="noopener">Quiero mi marca</a>
+        </div>
       </div>
-      <!-- Redes Sociales -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="7" y="7" width="26" height="26"/><path d="M7 20H33 M20 7V33"/></svg>
-        <h3>Diseño para Redes Sociales</h3>
-        <p>Publicaciones, historias, portadas y banners pensados para captar la atención en segundos.</p>
-        <div class="service-meta"><span class="label">Paquete de 10</span><span class="price">$1,000 MXN</span></div>
+
+      <!-- Contenido -->
+      <div class="service-card category-card tilt corners">
+        <span class="cat-index">02 — Contenido</span>
+        <h3>Redes que sí transmiten profesionalismo</h3>
+        <p>Puedes tener un gran producto y aun así verse poco profesional en redes. Creamos contenido visual consistente para generar confianza.</p>
+        <ul class="cat-includes">
+          <li>Publicaciones</li><li>Stories</li><li>Reels</li><li>Portadas</li><li>Banners</li><li>Miniaturas</li>
+        </ul>
+        <div class="cat-links"><a href="redes-sociales.html">Ver detalles de Redes Sociales →</a></div>
+        <div class="cat-footer">
+          <div class="price-block"><span class="label">Desde</span><span class="price">$1,000 MXN</span></div>
+          <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20mejorar%20mis%20redes" class="btn btn-outline" target="_blank" rel="noopener">Quiero mejorar mis redes</a>
+        </div>
       </div>
-      <!-- Video -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="6" y="10" width="20" height="20"/><path d="M26 16L34 11V29L26 24Z"/></svg>
-        <h3>Creación y Edición de Video</h3>
-        <p>Reels, TikToks y YouTube Shorts con subtítulos animados, transiciones y color profesional.</p>
-        <div class="service-meta"><span class="label">Por video</span><span class="price">$300 MXN</span></div>
+
+      <!-- Experiencias Digitales -->
+      <div class="service-card category-card tilt corners">
+        <span class="cat-index">03 — Experiencias Digitales</span>
+        <h3>Tu negocio, en todas las pantallas</h3>
+        <p>Páginas web y menús digitales que centralizan tu información y generan confianza antes de que el cliente llegue.</p>
+        <ul class="cat-includes">
+          <li>Páginas web</li><li>Menús digitales</li><li>Catálogos</li><li>Presentaciones</li>
+        </ul>
+        <div class="cat-links"><a href="menus-digitales.html">Ver Menús Digitales →</a><a href="paginas-web.html">Ver Páginas Web →</a></div>
+        <div class="cat-footer">
+          <div class="price-block"><span class="label">Desde</span><span class="price">$3,500 MXN</span></div>
+          <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20una%20experiencia%20digital%20para%20mi%20negocio" class="btn btn-outline" target="_blank" rel="noopener">Quiero una experiencia digital</a>
+        </div>
       </div>
-      <!-- Menus digitales -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="8" width="30" height="19" rx="1"/><path d="M15 32H25 M20 27V32"/></svg>
-        <h3>Menús Digitales para Pantallas</h3>
-        <p>Menús animados en bucle para pantallas comerciales, adaptados a tu marca y tu local.</p>
-        <div class="service-meta"><span class="label">Desde</span><span class="price">$3,500 MXN</span></div>
-      </div>
-      <!-- Publicitario -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 8H32V32H8Z"/><path d="M8 15H32 M15 15V32"/></svg>
-        <h3>Diseño Gráfico Publicitario</h3>
-        <p>Flyers, carteles, banners, catálogos, tarjetas de presentación y Roll Ups.</p>
-        <div class="service-meta"><span class="label">Por pieza</span><span class="price">$250–450 MXN</span></div>
-      </div>
-      <!-- Fotografia -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="20" cy="21" r="8"/><path d="M13 13L16 8H24L27 13"/></svg>
-        <h3>Edición de Fotografía</h3>
-        <p>Retoque y optimización de fotos de producto, platillos y catálogos.</p>
-        <div class="service-meta"><span class="label">Por foto</span><span class="price">$70 MXN</span></div>
-      </div>
-      <!-- Paginas Web -->
-      <div class="service-card tilt">
-        <svg class="service-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="8" width="30" height="24" rx="1"/><path d="M5 14H35"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="11" r="1" fill="currentColor" stroke="none"/></svg>
-        <h3>Diseño de Páginas Web</h3>
-        <p>Landing pages y sitios completos, diseñados desde cero para representar tu marca y convertir visitantes en clientes.</p>
-        <div class="service-meta"><span class="label">Desde</span><span class="price">$5,000 MXN</span></div>
+
+      <!-- Producción Visual -->
+      <div class="service-card category-card tilt corners">
+        <span class="cat-index">04 — Producción Visual</span>
+        <h3>Contenido que se ve como se merece</h3>
+        <p>Fotografía y video editados profesionalmente para que tus productos y tu publicidad luzcan al nivel de tu negocio.</p>
+        <ul class="cat-includes">
+          <li>Fotografía</li><li>Video</li><li>Diseño publicitario</li>
+        </ul>
+        <div class="cat-links"><a href="diseno-publicitario.html">Ver Diseño Publicitario →</a></div>
+        <div class="cat-footer">
+          <div class="price-block"><span class="label">Desde</span><span class="price">$70 MXN</span></div>
+          <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20producci%C3%B3n%20visual%20para%20mi%20negocio" class="btn btn-outline" target="_blank" rel="noopener">Quiero producción visual</a>
+        </div>
       </div>
     </div>
   </div>
@@ -878,22 +363,81 @@
   </div>
 </section>
 
-<!-- ============ TRABAJOS / MUESTRA ============ -->
-<section class="gallery" id="trabajos">
+<!-- ============ PROYECTOS ============ -->
+<section class="gallery" id="proyectos">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">Muestra</div>
-      <h2>Así se ve un proyecto Valhalla.</h2>
-      <p>Imágenes de referencia por categoría.</p>
+      <div class="eyebrow">Proyectos</div>
+      <h2>Diseño que habla antes que las palabras.</h2>
     </div>
 
     <div class="gallery-grid stagger">
-      <div class="gallery-item tilt corners"><img src="Imagenes/Identidad de marca.jpeg" alt="Identidad de marca" loading="lazy"><span class="tag">Identidad de Marca</span></div>
-      <div class="gallery-item tilt corners"><img src="Imagenes/post de redes sociales.jpeg" alt="Diseño para redes sociales" loading="lazy"><span class="tag">Redes Sociales</span></div>
-      <div class="gallery-item tilt corners"><video src="Imagenes/Video publicitario.mp4" autoplay loop muted playsinline></video><span class="tag">Video</span></div>
-      <div class="gallery-item tilt corners"><img src="Imagenes/Menu digital.jpeg" alt="Menú digital" loading="lazy"><span class="tag">Menú Digital</span></div>
-      <div class="gallery-item tilt corners"><img src="Imagenes/Diseño publicitario.jpeg" alt="Diseño publicitario" loading="lazy"><span class="tag">Diseño Publicitario</span></div>
-      <div class="gallery-item tilt corners"><img src="Imagenes/Fotografia.jpeg" alt="Edición fotográfica" loading="lazy"><span class="tag">Fotografía</span></div>
+      <div class="project-card">
+        <div class="gallery-item tilt corners"><img src="Imagenes/Identidad de marca.jpeg" alt="Identidad de marca" loading="lazy"><span class="tag">Identidad de Marca</span></div>
+        <div class="project-meta"><p>Un negocio sin marca clara pierde reconocimiento. Diseñamos una identidad memorable de principio a fin.</p></div>
+      </div>
+      <div class="project-card">
+        <div class="gallery-item tilt corners"><img src="Imagenes/post de redes sociales.jpeg" alt="Diseño para redes sociales" loading="lazy"><span class="tag">Redes Sociales</span></div>
+        <div class="project-meta"><p>Redes desordenadas alejan clientes. Contenido consistente construye confianza.</p></div>
+      </div>
+      <div class="project-card">
+        <div class="gallery-item tilt corners"><video src="Imagenes/Video publicitario.mp4" autoplay loop muted playsinline></video><span class="tag">Video</span></div>
+        <div class="project-meta"><p>Un producto sin movimiento pasa desapercibido. El video capta la atención en segundos.</p></div>
+      </div>
+      <div class="project-card">
+        <div class="gallery-item tilt corners"><img src="Imagenes/Menu digital.jpeg" alt="Menú digital" loading="lazy"><span class="tag">Menú Digital</span></div>
+        <div class="project-meta"><p>Un menú aburrido no vende.</p></div>
+      </div>
+      <div class="project-card">
+        <div class="gallery-item tilt corners"><img src="Imagenes/Diseño publicitario.jpeg" alt="Diseño publicitario" loading="lazy"><span class="tag">Diseño Publicitario</span></div>
+        <div class="project-meta"><p>La publicidad genérica se ignora. La personalizada se recuerda.</p></div>
+      </div>
+      <div class="project-card">
+        <div class="gallery-item tilt corners"><img src="Imagenes/Fotografia.jpeg" alt="Edición fotográfica" loading="lazy"><span class="tag">Fotografía</span></div>
+        <div class="project-meta"><p>Fotos mal iluminadas restan valor al producto. Una edición profesional lo eleva.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANTES / DESPUES ============ -->
+<section class="beforeafter">
+  <svg class="fjord-divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" style="position:absolute; top:0; left:0; transform:translateY(-50%);">
+    <path d="M0,30 C150,4 320,56 480,28 S760,2 940,30 S1120,54 1200,26"/>
+  </svg>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Transformación</div>
+      <h2>¿Cuánto puede cambiar la percepción de un negocio?</h2>
+      <p>La diferencia entre un negocio que se ve más y uno que se ve profesional casi nunca es el producto. Es la presencia.</p>
+    </div>
+
+    <div class="ba-grid reveal">
+      <div class="ba-card ba-before">
+        <span class="ba-label">Antes</span>
+        <ul>
+          <li>Redes sociales sin dirección visual clara</li>
+          <li>Un logo genérico, o ninguno</li>
+          <li>Un menú físico difícil de actualizar</li>
+          <li>Ninguna página que centralice tu información</li>
+        </ul>
+      </div>
+      <div class="ba-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12H19 M13 6L19 12L13 18"/></svg>
+      </div>
+      <div class="ba-card ba-after">
+        <span class="ba-label">Después</span>
+        <ul>
+          <li>Contenido consistente que genera confianza</li>
+          <li>Una identidad de marca memorable</li>
+          <li>Un menú digital animado, siempre actualizado</li>
+          <li>Una página web que convierte visitantes en clientes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:44px;">
+      <a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20mi%20transformaci%C3%B3n%20digital" class="btn btn-solid" target="_blank" rel="noopener">Quiero mi transformación</a>
     </div>
   </div>
 </section>
@@ -905,27 +449,103 @@
   </svg>
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">Por qué trabajar conmigo</div>
+      <div class="eyebrow">¿Por qué Valhalla?</div>
       <h2>Precisión de principio a fin.</h2>
     </div>
 
     <div class="why-grid stagger">
       <div class="why-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L10 18L20 6"/></svg>
-        <p>Diseños 100% personalizados y originales — cero plantillas genéricas.</p>
+        <h3 style="font-size:0.98rem; font-weight:600; margin-top:2px;">Diseño con propósito</h3>
+        <p>No diseñamos por decorar. Cada pieza tiene una función.</p>
       </div>
       <div class="why-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3V21 M3 12H21"/></svg>
-        <p>Comunicación clara, fluida y constante durante todo el proyecto.</p>
+        <h3 style="font-size:0.98rem; font-weight:600; margin-top:2px;">Una marca, un sistema</h3>
+        <p>Todo tu contenido mantiene coherencia visual.</p>
       </div>
       <div class="why-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7V12L15 15"/></svg>
-        <p>Puntualidad garantizada en cada entrega.</p>
+        <h3 style="font-size:0.98rem; font-weight:600; margin-top:2px;">Trato directo</h3>
+        <p>Hablas directamente con la persona responsable del proyecto.</p>
       </div>
       <div class="why-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3L20 8V16L12 21L4 16V8Z"/></svg>
-        <p>Enfoque estratégico: soluciones pensadas para que tu negocio en CDMX venda más.</p>
+        <h3 style="font-size:0.98rem; font-weight:600; margin-top:2px;">Sin plantillas genéricas</h3>
+        <p>Cada proyecto se desarrolla según tu negocio.</p>
       </div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 10H20"/></svg>
+        <h3 style="font-size:0.98rem; font-weight:600; margin-top:2px;">Pensado para negocios reales</h3>
+        <p>Diseñamos teniendo en cuenta cómo tu cliente verá y usará cada pieza.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE VALHALLA ============ -->
+<section class="about" id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <!-- REEMPLAZAR: tu foto, 500x600px aprox., fondo limpio -->
+        <img src="Imagenes/yo.png" alt="Abdiel Correa, fundador de Valhalla Studio">
+      </div>
+      <div class="about-copy reveal">
+        <div class="eyebrow">Detrás de Valhalla</div>
+        <h2 style="font-size:clamp(1.9rem,3.4vw,2.5rem); font-weight:700; margin-top:14px; line-height:1.15;">Sobre Valhalla Studio</h2>
+        <p>Valhalla Studio nace de una idea simple: ayudar a los negocios a convertir sus ideas en una presencia digital profesional, auténtica y memorable.</p>
+        <p>Soy Abdiel Correa, diseñador digital y fundador de Valhalla Studio. Combino diseño, estrategia y creatividad para construir marcas que no solo se vean bien, sino que comuniquen, conecten y ayuden a crecer.</p>
+        <p>Valhalla representa mi forma de trabajar: precisión, disciplina y atención a cada detalle. Porque una buena imagen no es solo estética. Es la primera impresión de tu negocio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <svg class="fjord-divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" style="position:absolute; top:0; left:0; transform:translateY(-50%);">
+    <path d="M0,28 C160,54 320,4 480,30 S780,56 960,26 S1120,2 1200,28"/>
+  </svg>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Preguntas Frecuentes</div>
+      <h2>¿Tienes dudas?</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>¿Trabajan solamente con negocios de CDMX?</summary>
+        <p>No. Trabajamos de forma remota con negocios en México y otros países. La mayoría del proceso se puede llevar por WhatsApp y correo.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo se realiza el pago?</summary>
+        <p>Se define un anticipo para comenzar el proyecto y el resto contra entrega. Los detalles se acuerdan claramente antes de empezar a trabajar.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cuántas modificaciones incluye cada proyecto?</summary>
+        <p>El número de rondas de ajustes depende del servicio o paquete contratado, y se explica desde antes de comenzar para que no haya sorpresas.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cuánto tarda un proyecto?</summary>
+        <p>Depende de la complejidad: una pieza puntual puede tomar unos días, mientras que una identidad de marca completa o un sitio web puede tomar unas semanas. Siempre se da un tiempo estimado antes de comenzar.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Necesito tener fotografías profesionales?</summary>
+        <p>No necesariamente. Podemos trabajar con lo que tengas disponible y sugerir mejoras si hace falta.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Puedo contratar solo un servicio, sin un paquete completo?</summary>
+        <p>Sí, todos los servicios están disponibles por separado — no es obligatorio contratar un paquete.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Cómo recibo los archivos finales?</summary>
+        <p>Se entregan en los formatos que necesites (PNG, JPG, PDF, etc.) por correo o enlace de descarga.</p>
+      </details>
+      <details class="faq-item">
+        <summary>¿Trabajan con negocios que apenas están empezando?</summary>
+        <p>Sí — de hecho es uno de los perfiles con los que más nos identificamos en Valhalla.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -948,12 +568,41 @@
   <div class="container">
     <div class="contact-panel reveal">
       <div class="eyebrow">Contacto</div>
-      <h2>Hablemos de tu proyecto.</h2>
-      <p>Cuéntame qué necesita tu negocio y te respondo con una propuesta clara — sin vueltas.</p>
-      <div class="contact-cta">
-        <a href="https://wa.me/529621495348" class="btn btn-solid" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-        <a href="mailto:correaabdiel8@gmail.com" class="btn btn-outline">Enviar un correo</a>
+      <h2>Cuéntanos qué necesita tu negocio.</h2>
+      <p>Dinos qué tipo de negocio tienes y qué quieres mejorar. Te respondemos con una propuesta clara — sin vueltas.</p>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <input type="text" id="cf-nombre" placeholder="Tu nombre" required>
+          <input type="text" id="cf-negocio" placeholder="Tu negocio">
+        </div>
+        <div class="form-row">
+          <select id="cf-necesita">
+            <option value="">¿Qué necesitas?</option>
+            <option value="Branding / Identidad de marca">Branding / Identidad de marca</option>
+            <option value="Redes sociales">Redes sociales</option>
+            <option value="Página web">Página web</option>
+            <option value="Menú digital">Menú digital</option>
+            <option value="Video">Video</option>
+            <option value="Diseño publicitario / Fotografía">Diseño publicitario / Fotografía</option>
+            <option value="Otro">Otro</option>
+          </select>
+          <select id="cf-presupuesto">
+            <option value="">Presupuesto aproximado</option>
+            <option value="Menos de $2,000 MXN">Menos de $2,000 MXN</option>
+            <option value="$2,000 - $5,000 MXN">$2,000 - $5,000 MXN</option>
+            <option value="$5,000 - $10,000 MXN">$5,000 - $10,000 MXN</option>
+            <option value="Más de $10,000 MXN">Más de $10,000 MXN</option>
+          </select>
+        </div>
+        <textarea id="cf-mensaje" rows="3" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+        <button type="submit" class="btn btn-solid" style="width:100%; justify-content:center;">Solicitar propuesta</button>
+      </form>
+
+      <div class="contact-alt">
+        <a href="mailto:correaabdiel8@gmail.com">o escríbenos directo a correaabdiel8@gmail.com</a>
       </div>
+
       <div class="contact-info">
         <div>
           <span class="label">Nombre</span>
@@ -972,6 +621,10 @@
   </div>
 </section>
 
+<a href="https://wa.me/529621495348?text=Hola%2C%20quiero%20mejorar%20la%20presencia%20digital%20de%20mi%20negocio" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.8L3 29l6.7-2.1c1.9 1 4.1 1.6 6.3 1.6 7 0 12.7-5.7 12.7-12.7S23 3 16 3zm0 23.1c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1.2 1.2-3.9-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.7 0-5.8 4.7-10.6 10.6-10.6 5.8 0 10.6 4.7 10.6 10.6S21.8 26.1 16 26.1zm5.8-7.9c-.3-.2-1.9-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.3 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="container">
@@ -983,159 +636,7 @@
   </div>
 </footer>
 
-<script>
-  // ---- Nav scroll state ----
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 30);
-  }, { passive:true });
-
-  // ---- Mobile menu toggle ----
-  const navToggle = document.getElementById('navToggle');
-  const mobilePanel = document.getElementById('mobilePanel');
-  navToggle.addEventListener('click', () => {
-    mobilePanel.classList.toggle('open');
-  });
-  mobilePanel.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => mobilePanel.classList.remove('open'));
-  });
-
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const heroEl = document.querySelector('.hero');
-  const glow = document.getElementById('cursorGlow');
-
-  // ---- Reveal on scroll (single elements) — se repite cada vez que entra/sale ----
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      entry.target.classList.toggle('is-visible', entry.isIntersecting);
-    });
-  }, { threshold:0.15 });
-  revealEls.forEach(el => io.observe(el));
-
-  // ---- Staggered reveal (grids) ----
-  document.querySelectorAll('.stagger').forEach(group => {
-    Array.from(group.children).forEach((child, i) => {
-      child.style.setProperty('--i', i);
-    });
-  });
-  const staggerIo = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      entry.target.classList.toggle('is-visible', entry.isIntersecting);
-    });
-  }, { threshold:0.1 });
-  document.querySelectorAll('.stagger').forEach(el => staggerIo.observe(el));
-
-  // ---- Fjord dividers draw-in on scroll — se repite cada vez ----
-  const dividerIo = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      entry.target.classList.toggle('is-visible', entry.isIntersecting);
-    });
-  }, { threshold:0.4 });
-  document.querySelectorAll('.fjord-divider').forEach(el => dividerIo.observe(el));
-  const progressBar = document.getElementById('progressBar');
-  function updateProgress(){
-    const h = document.documentElement;
-    const scrolled = h.scrollTop || document.body.scrollTop;
-    const height = h.scrollHeight - h.clientHeight;
-    progressBar.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
-  }
-  window.addEventListener('scroll', updateProgress, { passive:true });
-  updateProgress();
-
-  // ---- Tilt effect on cards ----
-  if (!prefersReduced && window.matchMedia('(hover: hover)').matches){
-    document.querySelectorAll('.tilt').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.setProperty('--rx', (px * 8).toFixed(2) + 'deg');
-        card.style.setProperty('--ry', (py * -8).toFixed(2) + 'deg');
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.setProperty('--rx', '0deg');
-        card.style.setProperty('--ry', '0deg');
-      });
-    });
-  }
-
-  // ---- Cursor glow in hero (cached rect + rAF, sin retraso) ----
-  if (!prefersReduced && window.matchMedia('(hover: hover)').matches){
-    let heroRect = heroEl.getBoundingClientRect();
-    let glowX = heroRect.width / 2, glowY = heroRect.height / 2;
-    let glowRafPending = false;
-
-    const refreshHeroRect = () => { heroRect = heroEl.getBoundingClientRect(); };
-    window.addEventListener('resize', refreshHeroRect);
-    window.addEventListener('scroll', refreshHeroRect, { passive:true });
-
-    heroEl.addEventListener('mousemove', (e) => {
-      glowX = e.clientX - heroRect.left;
-      glowY = e.clientY - heroRect.top;
-      if (!glowRafPending){
-        glowRafPending = true;
-        requestAnimationFrame(() => {
-          glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%,-50%)`;
-          glowRafPending = false;
-        });
-      }
-    });
-  }
-
-  // ---- Parallax on topographic contour containers ----
-  if (!prefersReduced){
-    const contourBoxes = document.querySelectorAll('.contour-bg');
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        contourBoxes.forEach(box => {
-          const r = box.getBoundingClientRect();
-          const offset = r.top * 0.06;
-          box.style.transform = `translateY(${offset}px)`;
-        });
-        ticking = false;
-      });
-    }, { passive:true });
-  }
-
-  // ---- Match STUDIO width exactly to VALHALLA's VISIBLE width (y centrar ambos) ----
-  function matchWordmark(){
-    const main = document.getElementById('lineMain');
-    const sub = document.getElementById('lineSub');
-    if (!main || !sub) return;
-
-    // letter-spacing deja un espacio "fantasma" tras la última letra que getBoundingClientRect
-    // sí cuenta como ancho, pero que no es texto visible. Lo restamos para comparar anchos reales.
-    const gMain = parseFloat(getComputedStyle(main).letterSpacing) || 0;
-    const mainVisibleWidth = main.getBoundingClientRect().width - gMain;
-
-    // Medimos STUDIO sin espaciado ni margen para tener su ancho base real
-    sub.style.letterSpacing = '0px';
-    sub.style.marginRight = '0px';
-    const baseWidth = sub.getBoundingClientRect().width;
-
-    const chars = sub.textContent.length;
-    const gaps = Math.max(chars - 1, 1); // espacios internos entre letras (sin contar el final)
-    const spacing = Math.max((mainVisibleWidth - baseWidth) / gaps, 0);
-
-    sub.style.letterSpacing = spacing + 'px';
-    sub.style.marginRight = (-spacing) + 'px'; // cancela su propio espacio final, igual que VALHALLA
-  }
-
-  if (document.fonts && document.fonts.ready){
-    document.fonts.ready.then(matchWordmark);
-  } else {
-    window.addEventListener('load', matchWordmark);
-  }
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(matchWordmark, 120);
-  });
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

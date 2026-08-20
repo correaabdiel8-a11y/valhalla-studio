@@ -603,6 +603,16 @@
   .foot-brand img{ width:28px; height:28px; border-radius:50%; border:1px solid var(--border); object-fit:cover; }
   .foot-brand span{ font-size:0.72rem; letter-spacing:0.14em; font-weight:600; }
   footer .meta{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--text-faint); letter-spacing:0.04em; }
+  .social-links{ display:flex; align-items:center; gap:14px; }
+  .social-links a{
+    width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted);
+    transition:color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+  }
+  .social-links a:hover{ color:var(--accent); border-color:var(--accent); transform:translateY(-2px); }
+  .social-links svg{ width:16px; height:16px; }
 
   ::selection{ background:var(--accent); color:#04121C; }
 

@@ -465,16 +465,50 @@
     background:rgba(7,9,14,0.75); backdrop-filter:blur(6px);
     padding:7px 11px; border:1px solid var(--border); color:var(--text);
   }
-  .project-card{ display:flex; flex-direction:column; }
-  .project-card .gallery-item{ aspect-ratio:4/5; }
-  .project-meta{ padding-top:16px; }
-  .project-tag{
-    display:inline-block;
-    font-family:'JetBrains Mono', monospace; font-size:0.66rem; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--accent);
-    border:1px solid var(--border); padding:4px 9px; border-radius:var(--radius);
+  .projects-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:900px){ .projects-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .projects-grid{ grid-template-columns:1fr; } }
+
+  .project-tile{
+    position:relative; display:block; aspect-ratio:3/4;
+    overflow:hidden; border:1px solid var(--border);
+    text-decoration:none; color:inherit; background:var(--surface);
   }
-  .project-meta p{ margin-top:12px; color:var(--text-muted); font-size:0.88rem; line-height:1.6; }
+  .project-tile img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .6s var(--ease), filter .4s var(--ease);
+  }
+  .project-tile:hover img{ transform:scale(1.06); }
+  .project-tile::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(to top, rgba(7,9,14,0.92) 0%, rgba(7,9,14,0.4) 42%, transparent 72%);
+  }
+  .project-tile-info{ position:absolute; left:0; right:0; bottom:0; padding:22px; z-index:2; }
+  .project-index{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    color:var(--accent); letter-spacing:0.1em;
+  }
+  .project-cat{
+    display:block; margin-top:6px;
+    font-family:'JetBrains Mono', monospace; font-size:0.66rem;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);
+  }
+  .project-name{
+    margin-top:10px; font-size:1.4rem; font-weight:700;
+    line-height:1.08; letter-spacing:0.005em;
+  }
+  .project-cta{
+    display:inline-flex; align-items:center; gap:6px; margin-top:14px;
+    font-family:'JetBrains Mono', monospace; font-size:0.74rem; color:var(--accent);
+    opacity:0; transform:translateY(6px);
+    transition:opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .project-tile:hover .project-cta{ opacity:1; transform:translateY(0); }
+
+  .project-tile.is-soon{ cursor:default; }
+  .project-tile.is-soon img{ filter:grayscale(0.5); opacity:0.65; }
+  .project-tile.is-soon .project-cat{ color:var(--text-faint); }
+  .project-tile.is-soon:hover img{ transform:none; }
 
   /* ============ ANTES / DESPUES ============ */
   .beforeafter{ padding:110px 0; background:var(--bg); }
@@ -699,3 +733,106 @@
     text-underline-offset:3px; transition:color .25s var(--ease);
   }
   .cat-links a:hover{ color:var(--accent); }
+
+  /* ============ PAGINAS DE CASO DE ESTUDIO (proyectos) ============ */
+  .case-hero{
+    min-height:88vh; display:flex; align-items:center;
+    padding:130px 0 70px; position:relative; overflow:hidden;
+  }
+  .case-hero-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;
+    width:100%;
+  }
+  @media (max-width:900px){ .case-hero-grid{ grid-template-columns:1fr; gap:36px; } }
+  .case-hero-copy .back-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:0.76rem; color:var(--text-faint);
+    margin-bottom:22px; transition:color .25s var(--ease);
+  }
+  .case-hero-copy .back-link:hover{ color:var(--accent); }
+  .case-hero-copy .case-wordmark{
+    font-size:clamp(2.2rem, 5.2vw, 3.6rem); font-weight:800; line-height:1.02;
+  }
+  .case-hero-copy .case-tagline{
+    margin-top:14px; font-family:'JetBrains Mono', monospace; font-size:0.8rem;
+    letter-spacing:0.06em; color:var(--accent);
+  }
+  .case-hero-copy p{ margin-top:22px; color:var(--text-muted); line-height:1.75; max-width:46ch; }
+  .case-hero-copy .case-desc{ margin-top:14px; color:var(--text-muted); line-height:1.75; max-width:46ch; }
+  .case-facts{ margin-top:34px; display:flex; flex-direction:column; gap:10px; border-top:1px solid var(--border); padding-top:22px; }
+  .case-facts .row{ display:flex; gap:16px; font-size:0.86rem; }
+  .case-facts .row .k{ width:150px; flex-shrink:0; color:var(--text-faint); font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; padding-top:2px; }
+  .case-facts .row .v{ color:var(--text); }
+  .case-hero-media{
+    position:relative; aspect-ratio:4/5; overflow:hidden; border:1px solid var(--border);
+  }
+  .case-hero-media img{ width:100%; height:100%; object-fit:cover; }
+
+  .case-section{ padding:100px 0; }
+  .case-section.alt{ background:var(--bg-2); }
+  .case-cols{ display:grid; grid-template-columns:180px 1fr; gap:48px; }
+  @media (max-width:760px){ .case-cols{ grid-template-columns:1fr; gap:18px; } }
+  .case-label{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--accent);
+    letter-spacing:0.12em; white-space:nowrap;
+  }
+  .case-cols h2{ font-size:clamp(1.6rem, 3vw, 2.3rem); font-weight:700; line-height:1.25; max-width:18ch; }
+  .case-cols .case-text{ margin-top:20px; }
+  .case-text p{ color:var(--text-muted); line-height:1.8; max-width:64ch; }
+  .case-text p + p{ margin-top:16px; }
+  .case-text-narrow p{ max-width:52ch; }
+
+  .case-media-full{ margin-top:56px; border:1px solid var(--border); overflow:hidden; }
+  .case-media-full img{ width:100%; height:auto; display:block; }
+  .case-media-full.tall img{ aspect-ratio:16/10; object-fit:cover; }
+  .case-media-full.huge img{ aspect-ratio:16/8; object-fit:cover; }
+
+  .case-indicators{
+    margin-top:18px; display:flex; flex-wrap:wrap; gap:10px 22px;
+  }
+  .case-indicators span{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.08em;
+    color:var(--text-faint); text-transform:uppercase;
+  }
+
+  .case-media-pair{ margin-top:56px; display:flex; flex-direction:column; gap:24px; }
+  .case-media-pair .case-media-full{ margin-top:0; }
+
+  .case-quote{
+    margin:64px auto 0; max-width:52ch; text-align:center;
+    font-size:clamp(1.3rem, 2.6vw, 1.9rem); font-weight:300; line-height:1.5; color:var(--text);
+  }
+
+  .case-varieties{ margin-top:22px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:700px){ .case-varieties{ grid-template-columns:1fr; } }
+  .case-varieties div{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--text-faint); letter-spacing:0.04em; text-align:center; padding-top:10px; }
+
+  .case-palette{ margin-top:56px; }
+  .case-palette h4, .case-type-specimen h4{
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--text-faint); margin-bottom:16px;
+  }
+  .case-swatches{ display:flex; gap:14px; flex-wrap:wrap; }
+  .case-swatch{ width:110px; }
+  .case-swatch .chip{ width:100%; aspect-ratio:1; border:1px solid var(--border); }
+  .case-swatch .hex{ margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--text-muted); }
+  .case-type-specimen{ margin-top:56px; }
+  .case-type-specimen .big{ font-size:clamp(2rem,5vw,3.4rem); font-weight:800; letter-spacing:0.05em; line-height:1.1; }
+  .case-type-specimen .nums{ font-family:'JetBrains Mono', monospace; font-size:1.2rem; color:var(--text-muted); margin-top:6px; }
+  .case-type-specimen .secondary-label{ margin-top:34px; }
+  .case-type-specimen .secondary-sample{ font-size:1.1rem; color:var(--text-muted); line-height:1.7; max-width:56ch; margin-top:10px; }
+
+  .case-graphic{ margin-top:32px; aspect-ratio:16/9; border:1px solid var(--border); background:var(--surface); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .case-graphic svg{ width:70%; height:70%; opacity:0.8; }
+
+  .case-spec-sheet{ margin-top:12px; max-width:640px; }
+  .case-spec-row{ display:flex; gap:24px; padding:16px 0; border-bottom:1px solid var(--border); }
+  .case-spec-row .k{ width:180px; flex-shrink:0; font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-faint); padding-top:2px; }
+  .case-spec-row .v{ color:var(--text); line-height:1.7; }
+  .case-spec-row .v ul{ display:flex; flex-direction:column; gap:4px; }
+
+  /* ---------- nota de cotización (reemplaza precios visibles) ---------- */
+  .quote-note{
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem;
+    letter-spacing:0.03em; color:var(--text-faint);
+  }
